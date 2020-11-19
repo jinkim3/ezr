@@ -1,0 +1,8 @@
+id,time,input_type,input_value
+1,Nov 19 2020 163501,iv,cyl
+1,Nov 19 2020 163501,dv,mpg
+1,Nov 19 2020 163501,iv_order,4
+1,Nov 19 2020 163501,iv_order,6
+1,Nov 19 2020 163501,iv_order,8
+1,Nov 19 2020 163501,sidebar_menu,histogram_by_group
+1,Nov 19 2020 163501,sigfig,3

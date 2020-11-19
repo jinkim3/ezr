@@ -26,11 +26,11 @@ You do not need to know anything about R to use this tool.
 
 Examples of things you can do include (but are not limited to):
 
-* getting descriptive statistics by experimental group
+* tabulating descriptive statistics for a variable
+* creating a frequency table for a variable
 * creating histograms by experimental group
-* creating scatter plots
-* calculating correlations
-* running multiple regressions
+* creating a scatter plot
+* calculating a correlation between two variables
 
 ## Installation
 
@@ -57,5 +57,5 @@ Here are some examples of using this package.
 library(ezr)
 
 # Start the Shiny server on a local machine
-ezr::start_shiny()
+start_ezr(data = mtcars)
 ```

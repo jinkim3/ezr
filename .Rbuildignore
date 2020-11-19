@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
+^drafts$
+^ezr_run_analysis\.csv
+^ezr_saved_analysis\.csv

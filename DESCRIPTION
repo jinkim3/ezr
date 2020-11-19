@@ -1,6 +1,6 @@
 Package: ezr
 Title: Easy Use of R via Shiny App for Basic Analyses of Experimental Data
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person(given = "Jin",
            family = "Kim",
@@ -19,18 +19,18 @@ Description: Runs a Shiny App in the local machine for basic statistical
 License: GPL-3
 URL: https://github.com/jinkim3/ezr
 BugReports: https://github.com/jinkim3/ezr/issues
-Imports: 
-    boot,
-    car,
+Imports:
     data.table,
-    dplyr,
+    DT,
     ggplot2,
-    lm.beta,
-    mediation,
-    Rmisc,
+    ggridges,
+    moments,
+    shiny,
+    shinydashboard,
+    shinyjs,
     stats,
     utils,
-    WRS2
+    weights
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
