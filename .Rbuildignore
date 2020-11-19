@@ -4,3 +4,5 @@
 ^drafts$
 ^ezr_run_analysis\.csv
 ^ezr_saved_analysis\.csv
+^\.github$
+^\.travis\.yml$

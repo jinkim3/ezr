@@ -33,7 +33,7 @@ program will open on a new tab or window of the local machine's
 web browser
 }
 \description{
-Starts ezr on the local machine
+Starts the ezr program on the local machine
 }
 \examples{
 if (interactive()) {start_ezr(data = mtcars)}

@@ -1,6 +1,6 @@
 #' Start ezr
 #'
-#' Starts ezr on the local machine
+#' Starts the ezr program on the local machine
 #'
 #' @param data_for_ezr a data object (a data frame or a data.table)
 #' @param sigfig number of significant digits to round to
