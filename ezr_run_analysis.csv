@@ -19,3 +19,10 @@ id,time,input_type,input_value
 5,Nov 19 2020 163459,iv_order,8
 5,Nov 19 2020 163459,sidebar_menu,histogram_by_group
 5,Nov 19 2020 163459,sigfig,3
+6,Nov 19 2020 173454,iv,cyl
+6,Nov 19 2020 173454,dv,mpg
+6,Nov 19 2020 173454,iv_order,4
+6,Nov 19 2020 173454,iv_order,6
+6,Nov 19 2020 173454,iv_order,8
+6,Nov 19 2020 173454,sidebar_menu,histogram_by_group
+6,Nov 19 2020 173454,sigfig,3

@@ -12,9 +12,12 @@ status](https://github.com/jinkim3/ezr/workflows/R-CMD-check/badge.svg)](https:/
 <!-- badges: end -->
 
 Point and click with your mouse to conduct basic analyses and create
-graphics quickly and easily. This package will run a “Shiny App” on your
-local machine, which allows you to analyze data without typing a line of
-code. You do not need to know anything about R to use this tool.
+graphics quickly and easily.
+
+This package will run a “Shiny App” on your local machine, which allows
+you to analyze data without the need to type a line of code.
+
+You do not need to know anything about R to use this tool.
 
 Examples of things you can do include (but are not limited to):
 

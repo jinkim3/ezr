@@ -34,10 +34,10 @@ start_ezr <- function(
       "Scatter plot",
       # "Raincloud plots + Table",
       "Histogram by Group")
-      # "Multiple Regression",
-      # "IV / DV Table",
-      # "Pivot Table",
-      # "View Data")
+  # "Multiple Regression",
+  # "IV / DV Table",
+  # "Pivot Table",
+  # "View Data")
   analysis_type <-
     c("saved_analysis",
       "desc_stats",
@@ -46,10 +46,10 @@ start_ezr <- function(
       "scatterplot",
       # "raincloud",
       "histogram_by_group")
-      # "regression",
-      # "iv_dv_table",
-      # "pivot_table",
-      # "view_data")
+  # "regression",
+  # "iv_dv_table",
+  # "pivot_table",
+  # "view_data")
   analysis_icon <-
     c("bookmark", # saved analysis
       "list", # desc stats
@@ -91,7 +91,7 @@ start_ezr <- function(
       x = ezr_saved_analysis,
       file = ezr_saved_analysis_file_name)
     message(paste0("The following file was created: ",
-                  ezr_saved_analysis_file_name))
+                   ezr_saved_analysis_file_name))
   }
 
   # create the run analysis csv if it doesn't exist
@@ -108,7 +108,7 @@ start_ezr <- function(
       x = shiny_run_analysis,
       file = ezr_run_analysis_file_name)
     message(paste0("The following file was created: ",
-                  ezr_run_analysis_file_name))
+                   ezr_run_analysis_file_name))
   }
 
   # import saved analysis csv for the first time
@@ -137,11 +137,11 @@ start_ezr <- function(
       label = "Select a variable:",
       choices = var_names,
       selected = NULL,
-      multiple = F,
+      multiple = FALSE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
-  iv_input <- function(multiple = T) {
+  iv_input <- function(multiple = TRUE) {
     selectizeInput(
       inputId = "iv",
       label = "Select IV(s):",
@@ -151,7 +151,7 @@ start_ezr <- function(
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
-  dv_input <- function(multiple = T) {
+  dv_input <- function(multiple = TRUE) {
     selectizeInput(
       inputId = "dv",
       label = "Select DV(s):",
@@ -167,7 +167,7 @@ start_ezr <- function(
       label = "Order for values in IV (Top to Bottom):",
       choices = "",
       selected = NULL,
-      multiple = T,
+      multiple = TRUE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
@@ -177,7 +177,7 @@ start_ezr <- function(
       label = "Include or exclude Totals?",
       choices = c("Include Totals", "Exclude Totals"),
       selected = NULL,
-      multiple = F,
+      multiple = FALSE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
@@ -194,11 +194,11 @@ start_ezr <- function(
         "max_after_removing_na",
         "geometric_mean_add_1_to_all_values"),
       selected = NULL,
-      multiple = F,
+      multiple = FALSE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
-  row_var_input <- function(multiple = T) {
+  row_var_input <- function(multiple = TRUE) {
     selectizeInput(
       inputId = "row_vars",
       label = "Select row variable(s):",
@@ -208,7 +208,7 @@ start_ezr <- function(
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
-  col_var_input <- function(multiple = T) {
+  col_var_input <- function(multiple = TRUE) {
     selectizeInput(
       inputId = "col_vars",
       label = "Select column variable(s):",
@@ -224,7 +224,7 @@ start_ezr <- function(
       label = "Select a cell variable:",
       choices = var_names,
       selected = NULL,
-      multiple = F,
+      multiple = FALSE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
@@ -236,7 +236,8 @@ start_ezr <- function(
     } else {
       dt01 <- saved_analysis_reactive_dt
       saved_analysis_ids <- sort(unique(dt01$id))
-      saved_analysis_to_choose_from <- rep(NA, length(saved_analysis_ids))
+      saved_analysis_to_choose_from <- rep(
+        NA, length(saved_analysis_ids))
       for(i in seq_along(saved_analysis_ids)) {
         specific_saved_analysis_dt <-
           dt01[get("id") == saved_analysis_ids[i]]
@@ -265,7 +266,7 @@ start_ezr <- function(
       inputId = "saved_analysis_choices",
       label = "Choose the saved analysis to view: ",
       choices = saved_analysis_to_choose_from,
-      multiple = T,
+      multiple = TRUE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
@@ -283,7 +284,7 @@ start_ezr <- function(
       inputId = "vars_for_outliers",
       label = "Remove outliers in the following variable(s):",
       choices = var_names,
-      multiple = T,
+      multiple = TRUE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
@@ -299,7 +300,7 @@ start_ezr <- function(
       inputId = "names_of_filter_vars",
       label = "Choose filtering variables:",
       choices = var_names,
-      multiple = T,
+      multiple = TRUE,
       options = list(maxOptions = select_list_max),
       width = "100%")
   }
@@ -307,35 +308,37 @@ start_ezr <- function(
     list(renderUI({sigfig_input()}),
          renderUI({outlier_input()}),
          renderUI({filter_vars_input_1()}))
-  analysis_input_1 <- function(active_tab, saved_analysis_reactive_dt) {
+  analysis_input_1 <- function(
+    active_tab, saved_analysis_reactive_dt) {
     if(active_tab %in% c("saved_analysis")) {
-      uis <- list(renderUI({saved_analysis_input(saved_analysis_reactive_dt)}))
+      uis <- list(renderUI({
+        saved_analysis_input(saved_analysis_reactive_dt)}))
     }
     if(active_tab %in% c("desc_stats", "freq_table", "histogram")) {
       uis <- list(renderUI({one_var_input()}))
     }
     if(active_tab == "scatterplot") {
-      uis <- list(renderUI({iv_input(multiple = F)}),
-                  renderUI({dv_input(multiple = F)}))
+      uis <- list(renderUI({iv_input(multiple = FALSE)}),
+                  renderUI({dv_input(multiple = FALSE)}))
     }
     if(active_tab %in% c("raincloud", "histogram_by_group")) {
-      uis <- list(renderUI({iv_input(multiple = F)}),
-                  renderUI({dv_input(multiple = F)}),
+      uis <- list(renderUI({iv_input(multiple = FALSE)}),
+                  renderUI({dv_input(multiple = FALSE)}),
                   renderUI({iv_order_input()}))
     }
     if(active_tab == "regression") {
-      uis <- list(renderUI({iv_input(multiple = T)}),
-                  renderUI({dv_input(multiple = T)}))
+      uis <- list(renderUI({iv_input(multiple = TRUE)}),
+                  renderUI({dv_input(multiple = TRUE)}))
     }
     if(active_tab == "iv_dv_table") {
-      uis <- list(renderUI({iv_input(multiple = T)}),
-                  renderUI({dv_input(multiple = T)}),
+      uis <- list(renderUI({iv_input(multiple = TRUE)}),
+                  renderUI({dv_input(multiple = TRUE)}),
                   renderUI({include_totals_input()}),
                   renderUI({function_name_input()}))
     }
     if(active_tab == "pivot_table") {
-      uis <- list(renderUI({row_var_input(multiple = T)}),
-                  renderUI({col_var_input(multiple = T)}),
+      uis <- list(renderUI({row_var_input(multiple = TRUE)}),
+                  renderUI({col_var_input(multiple = TRUE)}),
                   renderUI({cell_var_input()}),
                   renderUI({function_name_input()}),
                   renderUI({include_totals_input()}))
@@ -417,7 +420,8 @@ start_ezr <- function(
       inputs_to_save <- c("iv", "dv", "include_totals", "function_name")
     }
     if(analysis %in% c("pivot_table")) {
-      inputs_to_save <- c("row_vars", "col_vars", "cell_var", "function_name")
+      inputs_to_save <- c(
+        "row_vars", "col_vars", "cell_var", "function_name")
     }
     inputs_to_save <- c(
       inputs_to_save, "sidebar_menu", "sigfig",
@@ -428,7 +432,6 @@ start_ezr <- function(
   header <- shinydashboard::dashboardHeader(title = "ezr v0.1.1")
   sidebar <- shinydashboard::dashboardSidebar(uiOutput("sidebar_01"))
   body <- shinydashboard::dashboardBody(
-    shinyjs::useShinyjs(),
     uiOutput("body"),
     fluidRow(
       column(
@@ -446,9 +449,10 @@ start_ezr <- function(
         width = 8,
         lapply(seq_len(number_of_dynamic_output_sections), function(i) {
           uiOutput(paste0("dynamic_output_section_", i))})),
-      tags$style(type='text/css',
-                 ".selectize-dropdown-content {max-height: 500px; }
-               .content-wrapper, .right-side {background-color: #FFFFFF;}")))
+      tags$style(
+        type='text/css',
+        ".selectize-dropdown-content {max-height: 500px; }
+        .content-wrapper, .right-side {background-color: #FFFFFF;}")))
   # ui
   ui <- shinydashboard::dashboardPage(
     header, sidebar, body, skin = "blue")
@@ -457,13 +461,15 @@ start_ezr <- function(
     # sidebar ui
     output$sidebar_01 <- renderUI({
       shinydashboard::sidebarMenu(
-          id = "sidebar_menu",
-          lapply(1:nrow(sidebar_menu_dt),
-                 function(i) {
-                   shinydashboard::menuItem(sidebar_menu_dt$analysis_type_label[i],
-                            tabName = sidebar_menu_dt$analysis_type[i],
-                            icon = icon(sidebar_menu_dt$analysis_icon[i]))}))
-      })
+        id = "sidebar_menu",
+        lapply(
+          1:nrow(sidebar_menu_dt),
+          function(i) {
+            shinydashboard::menuItem(
+              sidebar_menu_dt$analysis_type_label[i],
+              tabName = sidebar_menu_dt$analysis_type[i],
+              icon = icon(sidebar_menu_dt$analysis_icon[i]))}))
+    })
     # reactive values
     reactive_values <- reactiveValues()
     reactive_dt <- reactiveValues()
@@ -529,11 +535,11 @@ start_ezr <- function(
           output[[paste0("filter_var_", i, "_checkboxes")]] <-
             if(is.na(filter_vars[i])) {} else {
               choices <- sort(unique(
-                data_for_ezr[[filter_vars[i]]]), na.last = F)
+                data_for_ezr[[filter_vars[i]]]), na.last = FALSE)
               renderUI({checkboxGroupInput(
                 inputId = paste0("filter_var_", i),
                 label = paste0(filter_vars[i], ":"),
-                choices = choices, inline = T)})}}})})
+                choices = choices, inline = TRUE)})}}})})
     # observer for newly loaded inputs
     observe({
       input$sidebar_menu
@@ -564,7 +570,8 @@ start_ezr <- function(
         gsub("(^\\d+) - .*", "\\1",
              input$saved_analysis_choices[1]) # use only the first
       # load the saved analysis
-      dt01 <- reactive_dt$saved_analysis[get("id") == id_of_analysis_to_load]
+      dt01 <- reactive_dt$saved_analysis[
+        get("id") == id_of_analysis_to_load]
       # switch to the tab
       sidebar_menu_item_to_switch_to <-
         dt01[get("input_type") == "sidebar_menu"][["input_value"]]
@@ -594,14 +601,14 @@ start_ezr <- function(
               session, inputId = x,
               selected = dt01[get("input_type") == x][["input_value"]])
           })
-          reactive_values$ready_to_load_input_values <- T
-        }, ignoreInit = T)
+          reactive_values$ready_to_load_input_values <- TRUE
+        }, ignoreInit = TRUE)
     # debounce for resetting
     load_saved_input_values_debounced <-
       debounce(load_saved_input_values,
                debounce_ms_for_resetting_loaded_inputs)
     observeEvent(load_saved_input_values_debounced(),{
-      req(reactive_values$ready_to_load_input_values == T)
+      req(reactive_values$ready_to_load_input_values == TRUE)
       reactive_dt$loaded_inputs <- NULL
     })
     # update input on load saved button click
@@ -668,7 +675,7 @@ start_ezr <- function(
             statistic = names(desc_stats(dt01[[input$var]])),
             value = signif(
               desc_stats(dt01[[input$var]]), input$sigfig))
-          })}
+        })}
       # frequency table
       if(active_tab == "freq_table") {
         output$table_1 <- DT::renderDataTable({
@@ -678,9 +685,9 @@ start_ezr <- function(
       if(active_tab == "histogram") {
         output$plot_1 <- renderPlot({
           graphics::hist(dt01[[input$var]],
-               main = paste0("Histogram of ", input$var),
-               xlab = input$var,
-               breaks = "FD")
+                         main = paste0("Histogram of ", input$var),
+                         xlab = input$var,
+                         breaks = "FD")
         }, width = 800, height = plot_1_height)}
       # scatterplot
       if(active_tab == "scatterplot") {
@@ -712,7 +719,7 @@ start_ezr <- function(
             #     name_of_iv = input$iv,
             #     order_of_groups_top_to_bot = input$iv_order)
             # } else
-              if(active_tab == "histogram_by_group") {
+            if(active_tab == "histogram_by_group") {
               histogram_by_group(
                 data = dt01,
                 iv_name = input$iv,
@@ -839,7 +846,7 @@ start_ezr <- function(
     observeEvent(input$save_btn, {
       # ezr_saved_analysis <-
       #   import_data(ezr_saved_analysis_file_name,
-      #               open_file_if_missing = F)
+      #               open_file_if_missing = FALSE)
       dt01 <- reactive_dt$saved_analysis
       # save inputs
       input_names <- inputs_to_save(input$sidebar_menu)
@@ -890,54 +897,6 @@ start_ezr <- function(
       # save again
       reactive_dt$saved_analysis <- saved_analysis_dt
     })
-    # test_values <- list(
-    #   renderPrint(c("reactive_values$inputs_to_load:", reactive_values$inputs_to_load)),
-    #   renderPrint(c("reactive_values$need_to_load_main_input_values:", reactive_values$need_to_load_main_input_values)),
-    #   renderPrint(c("reactive_values$need_to_load_filter_vars:", reactive_values$need_to_load_filter_vars)),
-    #   renderPrint(c("reactive_values$need_to_load_iv_order:", reactive_values$need_to_load_iv_order)),
-    #   renderPrint(c("sidebar_menu:", input$sidebar_menu)),
-    #   renderPrint(c("var:", input$var)),
-    #   renderPrint(c("iv:", input$iv)),
-    #   renderPrint(c("dv:", input$dv)),
-    #   renderPrint(c("iv_order:", input$iv_order)),
-    #   renderPrint(c("include_totals:", input$include_totals)),
-    #   renderPrint(c("function_name:", input$function_name)),
-    #   renderPrint(c("row_vars:", input$row_vars)),
-    #   renderPrint(c("col_vars:", input$col_vars)),
-    #   renderPrint(c("cell_var:", input$cell_var)),
-    #   renderPrint(c("saved_analysis_choices:", input$saved_analysis_choices)),
-    #   renderPrint(c("vars_for_outliers:", input$vars_for_outliers)),
-    #   renderPrint(c("sigfig:", input$sigfig)),
-    #   renderPrint(c("names_of_filter_vars:", input$names_of_filter_vars)),
-    #   renderPrint(c("reactive_values$loaded_filter_vars:", reactive_values$loaded_filter_vars)),
-    #   renderPrint(c("run_btn:", input$run_btn)),
-    #   renderPrint(c("save_btn:", input$save_btn)),
-    #   renderPrint(c("load_saved_btn:", input$load_saved_btn)),
-    #   renderPrint(c("delete_saved_btn:", input$delete_saved_btn)),
-    #   renderPrint(c("reac dt saved analy row:", sort(unique(reactive_dt$saved_analysis$id)))),
-    #   renderPrint(c("input$saved_analysis_choices[1]:", input$saved_analysis_choices[1])),
-    #   renderPrint(c("reactive_dt$loaded_inputs:", reactive_dt$loaded_inputs)),
-    #   renderPrint(c("reactive_values$loaded_iv_order :", reactive_values$loaded_iv_order)),
-    #   renderPrint(c("reactive_values$filter_var_checkboxes_ready:", reactive_values$filter_var_checkboxes_ready)),
-    #   renderPrint(c("reactive_values$ready_to_load_input_ui:", reactive_values$ready_to_load_input_ui)),
-    #   renderPrint(c("reactive_values$ready_to_load_input_values:", reactive_values$ready_to_load_input_values)),
-    #   renderPrint(c("reactive_values$filter_var_ids_to_load:", reactive_values$filter_var_ids_to_load)),
-    #   renderPrint(c("reactive_values$filter_var_1_values_to_load:", reactive_values$filter_var_1_values_to_load)),
-    #   renderPrint(c("reactive_values$analysis_option_ui_ready:", reactive_values$analysis_option_ui_ready)),
-    #   renderPrint(c("reactive_values$input_ui_main_ready:", reactive_values$input_ui_main_ready)),
-    #   renderPrint(c("reactive_values$iv_order_ui_ready:", reactive_values$iv_order_ui_ready)),
-    #   renderPrint(c("reactive_values$loaded_iv_order:", reactive_values$loaded_iv_order)),
-    #   renderPrint(c("reactive_values$filter_var_checkboxes_ready:", reactive_values$filter_var_checkboxes_ready)),
-    #   renderPrint(c("reactive_values$ready_to_load_input_ui:", reactive_values$ready_to_load_input_ui)),
-    #   renderPrint(c("reactive_values$ready_to_load_input_values:", reactive_values$ready_to_load_input_values)),
-    #   renderPrint(c("reactive_values$all_input_values_loaded:", reactive_values$all_input_values_loaded)),
-    #   renderPrint(c(paste0("input$filter_var_", 1, ":"), input[[paste0("filter_var_", 1)]])),
-    #   renderPrint(c(paste0("input$filter_var_", 2, ":"), input[[paste0("filter_var_", 2)]])),
-    #   renderPrint(c(paste0("input$filter_var_", 3, ":"), input[[paste0("filter_var_", 3)]]))
-    # )
-    # lapply(seq_along(test_values), function(i) {
-    #   output[[paste0("testing", i)]] <- test_values[[i]]
-    # })
   }
   # create the app to run
   shiny_app <- list(ui = ui, server = server)
