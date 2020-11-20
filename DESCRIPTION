@@ -9,8 +9,8 @@ Authors@R:
            email = "jin.m.kim@yale.edu",
            comment = c(ORCID = "https://orcid.org/0000-0002-5013-3958"))
 Description: Runs a Shiny App in the local machine for basic
-    statistical and graphical analyses. The Shiny App's point-and-click
-    interface enables obtaining the same analysis outputs (e.g., plots and
+    statistical and graphical analyses. The point-and-click interface 
+    of Shiny App enables obtaining the same analysis outputs (e.g., plots and
     tables) more quickly, as compared with typing the required code in R,
     especially for users without much experience or expertise with coding.
     Examples of possible analyses include tabulating descriptive
