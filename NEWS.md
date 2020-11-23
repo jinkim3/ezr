@@ -1,3 +1,8 @@
+# ezr 0.1.5
+* Following the suggestion by Ms. Julia Haider, I wrapped the scatterplot
+function's examples in "\donttest{}" as the execution time was greater 
+than 5 seconds on linux
+
 # ezr 0.1.4
 * Wrapped the scatterplot function's examples in "dontrun" to avoid going over
 5 seconds when testing in a linux system.
