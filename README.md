@@ -31,7 +31,7 @@ Examples of things you can do include (but are not limited to):
 
 ## Installation
 
-You can install the released version of kim from
+You can install the released version of ezr from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
