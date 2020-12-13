@@ -1,7 +1,7 @@
 Package: ezr
 Title: Easy Use of R via Shiny App for Basic Analyses of
     Experimental Data
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: 
     person(given = "Jin",
            family = "Kim",

@@ -9,6 +9,8 @@
 status](https://travis-ci.com/jinkim3/ezr.svg?branch=master)](https://travis-ci.com/jinkim3/ezr)
 [![R build
 status](https://github.com/jinkim3/ezr/workflows/R-CMD-check/badge.svg)](https://github.com/jinkim3/ezr/actions)
+[![Total
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezr?color=blue)](https://cran.r-project.org/package=ezr)
 <!-- badges: end -->
 
 Point and click with your mouse to conduct basic analyses and create
