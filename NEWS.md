@@ -1,3 +1,6 @@
+# ezr 0.1.6
+* Edited code following reviews by CodeFactor
+
 # ezr 0.1.5
 * Following the suggestion by Ms. Julia Haider, I wrapped the scatterplot
 function's examples in "\donttest{}" as the execution time was greater 

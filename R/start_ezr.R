@@ -95,7 +95,7 @@ start_ezr <- function(
   }
 
   # create the run analysis csv if it doesn't exist
-  if(!file.exists(ezr_run_analysis_file_name)) {
+  if (!file.exists(ezr_run_analysis_file_name)) {
     # initialize the csv for saving analysis
     shiny_run_analysis <-
       data.table(
@@ -229,16 +229,16 @@ start_ezr <- function(
       width = "100%")
   }
   saved_analysis_input <- function(saved_analysis_reactive_dt) {
-    if(is.null(saved_analysis_reactive_dt)) {
+    if (is.null(saved_analysis_reactive_dt)) {
       saved_analysis_to_choose_from <- ""
-    } else if(missing(saved_analysis_reactive_dt)) {
+    } else if (missing(saved_analysis_reactive_dt)) {
       saved_analysis_to_choose_from <- ""
     } else {
       dt01 <- saved_analysis_reactive_dt
       saved_analysis_ids <- sort(unique(dt01$id))
       saved_analysis_to_choose_from <- rep(
         NA, length(saved_analysis_ids))
-      for(i in seq_along(saved_analysis_ids)) {
+      for (i in seq_along(saved_analysis_ids)) {
         specific_saved_analysis_dt <-
           dt01[get("id") == saved_analysis_ids[i]]
         saved_analysis_temp_1 <-
@@ -249,12 +249,12 @@ start_ezr <- function(
             get("input_type") != "sidebar_menu"][["input_type"]])
         saved_analysis_temp_3_string <-
           paste0(
-            sapply(saved_analysis_temp_2_var_type, function(x) {
+            vapply(saved_analysis_temp_2_var_type, function(x) {
               paste0(
                 x, ": ", paste0(
                   specific_saved_analysis_dt[
                     get("input_type") == x][["input_value"]],
-                  collapse = ", "))}),
+                  collapse = ", "))}, character(1L)),
             collapse = " / ")
         saved_analysis_to_choose_from[i] <-
           paste0(saved_analysis_ids[i], " - ",
@@ -310,40 +310,40 @@ start_ezr <- function(
          renderUI({filter_vars_input_1()}))
   analysis_input_1 <- function(
     active_tab, saved_analysis_reactive_dt) {
-    if(active_tab %in% c("saved_analysis")) {
+    if (active_tab == "saved_analysis") {
       uis <- list(renderUI({
         saved_analysis_input(saved_analysis_reactive_dt)}))
     }
-    if(active_tab %in% c("desc_stats", "freq_table", "histogram")) {
+    if (active_tab %in% c("desc_stats", "freq_table", "histogram")) {
       uis <- list(renderUI({one_var_input()}))
     }
-    if(active_tab == "scatterplot") {
+    if (active_tab == "scatterplot") {
       uis <- list(renderUI({iv_input(multiple = FALSE)}),
                   renderUI({dv_input(multiple = FALSE)}))
     }
-    if(active_tab %in% c("raincloud", "histogram_by_group")) {
+    if (active_tab %in% c("raincloud", "histogram_by_group")) {
       uis <- list(renderUI({iv_input(multiple = FALSE)}),
                   renderUI({dv_input(multiple = FALSE)}),
                   renderUI({iv_order_input()}))
     }
-    if(active_tab == "regression") {
+    if (active_tab == "regression") {
       uis <- list(renderUI({iv_input(multiple = TRUE)}),
                   renderUI({dv_input(multiple = TRUE)}))
     }
-    if(active_tab == "iv_dv_table") {
+    if (active_tab == "iv_dv_table") {
       uis <- list(renderUI({iv_input(multiple = TRUE)}),
                   renderUI({dv_input(multiple = TRUE)}),
                   renderUI({include_totals_input()}),
                   renderUI({function_name_input()}))
     }
-    if(active_tab == "pivot_table") {
+    if (active_tab == "pivot_table") {
       uis <- list(renderUI({row_var_input(multiple = TRUE)}),
                   renderUI({col_var_input(multiple = TRUE)}),
                   renderUI({cell_var_input()}),
                   renderUI({function_name_input()}),
                   renderUI({include_totals_input()}))
     }
-    if(active_tab %in% c("view_data")) {
+    if (active_tab == "view_data") {
       uis <- list()
     }
     return(uis)
@@ -364,10 +364,10 @@ start_ezr <- function(
                  label = "Delete Saved Analysis", width = "80%")
   }
   button_input_1 <- function(active_tab) {
-    if(active_tab == "saved_analysis") {
+    if (active_tab == "saved_analysis") {
       buttons <- list(renderUI({load_saved_btn_input()}),
                       renderUI({delete_saved_btn_input()}))
-    } else if(active_tab == "view_data") {
+    } else if (active_tab == "view_data") {
       buttons <- list(renderUI({run_btn_input()}))
     } else {
       buttons <- list(renderUI({run_btn_input()}),
@@ -380,14 +380,14 @@ start_ezr <- function(
                      renderUI({uiOutput("message_to_user_02")}),
                      renderUI({textOutput("outlier_report_1")}),
                      renderUI({DT::DTOutput("outlier_report_table")}))
-    if(active_tab %in% c("desc_stats", "freq_table", "regression",
+    if (active_tab %in% c("desc_stats", "freq_table", "regression",
                          "iv_dv_table", "pivot_table", "view_data")) {
       sections <- c(sections, list(renderUI({DT::DTOutput("table_1")})))
     }
-    if(active_tab %in% c("histogram", "scatterplot")) {
+    if (active_tab %in% c("histogram", "scatterplot")) {
       sections <- c(sections, list(renderUI({plotOutput("plot_1")})))
     }
-    if(active_tab %in% c("raincloud", "histogram_by_group")) {
+    if (active_tab %in% c("raincloud", "histogram_by_group")) {
       sections <- c(sections, list(
         renderUI({plotOutput("plot_1", height = plot_1_height)}),
         renderUI({DT::DTOutput("table_2")}),
@@ -407,19 +407,19 @@ start_ezr <- function(
            seq_len(number_of_dynamic_output_sections)),
     names_of_output_sections)
   inputs_to_save <- function(analysis) {
-    if(analysis %in% c("desc_stats", "freq_table", "histogram")) {
+    if (analysis %in% c("desc_stats", "freq_table", "histogram")) {
       inputs_to_save <- "var"
     }
-    if(analysis %in% c("scatterplot", "regression")) {
+    if (analysis %in% c("scatterplot", "regression")) {
       inputs_to_save <- c("iv", "dv")
     }
-    if(analysis %in% c("raincloud", "histogram_by_group")) {
+    if (analysis %in% c("raincloud", "histogram_by_group")) {
       inputs_to_save <- c("iv", "dv", "iv_order")
     }
-    if(analysis %in% c("iv_dv_table")) {
+    if (analysis == "iv_dv_table") {
       inputs_to_save <- c("iv", "dv", "include_totals", "function_name")
     }
-    if(analysis %in% c("pivot_table")) {
+    if (analysis %in% c("pivot_table")) {
       inputs_to_save <- c(
         "row_vars", "col_vars", "cell_var", "function_name")
     }
@@ -463,7 +463,7 @@ start_ezr <- function(
       shinydashboard::sidebarMenu(
         id = "sidebar_menu",
         lapply(
-          1:nrow(sidebar_menu_dt),
+          seq_len(nrow(sidebar_menu_dt)),
           function(i) {
             shinydashboard::menuItem(
               sidebar_menu_dt$analysis_type_label[i],
@@ -515,11 +515,11 @@ start_ezr <- function(
       input$iv
       # fill in values
       req(input$sidebar_menu)
-      if(input$sidebar_menu %in% c("raincloud", "histogram_by_group")) {
-        if(!is.null(input$iv)) {
-          choices <- if(input$iv == "") "" else
+      if (input$sidebar_menu %in% c("raincloud", "histogram_by_group")) {
+        if (!is.null(input$iv)) {
+          choices <- if (input$iv == "") "" else
             sort(unique(data_for_ezr[[input$iv]]))
-          iv_order_to_update_to <- if(length(choices) > 20) NULL else choices
+          iv_order_to_update_to <- if (length(choices) > 20) NULL else choices
           updateSelectizeInput(
             session, inputId = "iv_order",
             choices = choices,
@@ -529,11 +529,11 @@ start_ezr <- function(
     observe({
       filter_vars <- input$names_of_filter_vars
       lapply(seq_len(number_of_max_filter_vars), function(i) {
-        if(is.null(filter_vars)) {
+        if (is.null(filter_vars)) {
           output[[paste0("filter_var_", i, "_checkboxes")]] <- {}
         } else {
           output[[paste0("filter_var_", i, "_checkboxes")]] <-
-            if(is.na(filter_vars[i])) {} else {
+            if (is.na(filter_vars[i])) {} else {
               choices <- sort(unique(
                 data_for_ezr[[filter_vars[i]]]), na.last = FALSE)
               renderUI({checkboxGroupInput(
@@ -622,7 +622,7 @@ start_ezr <- function(
       # get the dt for saved analysis
       ezr_saved_analysis <-
         ezr_saved_analysis[!get("id") %in% id_of_saved_analysis]
-      if(nrow(ezr_saved_analysis) == 0) {
+      if (nrow(ezr_saved_analysis) == 0) {
         ezr_saved_analysis <-
           data.table(
             id = numeric(),
@@ -649,8 +649,8 @@ start_ezr <- function(
       # get data
       dt01 <- data_for_ezr
       # remove outliers
-      if(!is.null(input$vars_for_outliers)) {
-        for(i in seq_along(input$vars_for_outliers)) {
+      if (!is.null(input$vars_for_outliers)) {
+        for (i in seq_along(input$vars_for_outliers)) {
           dt01 <- dt01[
             dt01[[input$vars_for_outliers[i]]] %in%
               dt01[[input$vars_for_outliers[i]]][
@@ -660,16 +660,16 @@ start_ezr <- function(
         }
       }
       # filter data
-      if(length(input$names_of_filter_vars) > 0) {
-        for(i in seq_along(input$names_of_filter_vars)) {
+      if (length(input$names_of_filter_vars) > 0) {
+        for (i in seq_along(input$names_of_filter_vars)) {
           dt01 <- dt01[dt01[[input$names_of_filter_vars[i]]] %in% gsub(
             "^$", NA, input[[paste0("filter_var_", i)]]), ]}}
       # if iv_order was used as a filter
-      if(!is.null(input$iv_order)) {
+      if (!is.null(input$iv_order)) {
         dt01 <- dt01[dt01[[input$iv]] %in% input$iv_order, ]
       }
       # descriptive stats
-      if(active_tab == "desc_stats") {
+      if (active_tab == "desc_stats") {
         output$table_1 <- DT::renderDataTable({
           data.table(
             statistic = names(desc_stats(dt01[[input$var]])),
@@ -677,12 +677,12 @@ start_ezr <- function(
               desc_stats(dt01[[input$var]]), input$sigfig))
         })}
       # frequency table
-      if(active_tab == "freq_table") {
+      if (active_tab == "freq_table") {
         output$table_1 <- DT::renderDataTable({
           tabulate_vector(
             dt01[[input$var]], sigfigs = input$sigfig)})}
       # histogram
-      if(active_tab == "histogram") {
+      if (active_tab == "histogram") {
         output$plot_1 <- renderPlot({
           graphics::hist(dt01[[input$var]],
                          main = paste0("Histogram of ", input$var),
@@ -690,7 +690,7 @@ start_ezr <- function(
                          breaks = "FD")
         }, width = 800, height = plot_1_height)}
       # scatterplot
-      if(active_tab == "scatterplot") {
+      if (active_tab == "scatterplot") {
         output$plot_1 <- renderPlot({
           withProgress(
             message = "Generating the plot...",
@@ -701,8 +701,8 @@ start_ezr <- function(
               annotate_stats = TRUE))
         }, width = 800, height = plot_1_height)}
       # raincloud or histogram by group
-      if(active_tab %in% c("raincloud", "histogram_by_group")) {
-        if(length(unique(dt01[[input$iv]])) > 20) {
+      if (active_tab %in% c("raincloud", "histogram_by_group")) {
+        if (length(unique(dt01[[input$iv]])) > 20) {
           output$message_to_user_01 <- renderText({
             paste0("The IV has more than 20 levels. ",
                    "The server cannot handle this operation.")
@@ -712,14 +712,14 @@ start_ezr <- function(
             "Generating and uploading the plot..."})
           output$plot_1 <- renderPlot({withProgress(
             message = "Generating the plot...",
-            # if(active_tab == "raincloud") {
+            # if (active_tab == "raincloud") {
             #   raincloud_by_group(
             #     data = dt01,
             #     name_of_dv = input$dv,
             #     name_of_iv = input$iv,
             #     order_of_groups_top_to_bot = input$iv_order)
             # } else
-            if(active_tab == "histogram_by_group") {
+            if (active_tab == "histogram_by_group") {
               histogram_by_group(
                 data = dt01,
                 iv_name = input$iv,
@@ -744,7 +744,7 @@ start_ezr <- function(
         }
       }
       # # regression
-      # if(active_tab == "regression") {
+      # if (active_tab == "regression") {
       #   output$table_1 <- DT::renderDataTable({
       #     regression_table_for_shiny(
       #       data = dt01,
@@ -752,18 +752,18 @@ start_ezr <- function(
       #       iv_names = input$iv,
       #       sigfig = input$sigfig)})}
       # # iv dv table
-      # if(active_tab == "iv_dv_table") {
+      # if (active_tab == "iv_dv_table") {
       #   # limit by number of unique values
       #   number_of_rows <-
       #     prod(sapply(input$iv, function(x) {
       #       length(unique(dt01[[x]]))}))
-      #   if(number_of_rows > 100) {
+      #   if (number_of_rows > 100) {
       #     output$message_to_user_01 <- renderText({
       #       paste0("There will be more than 100 rows in the table. ",
       #              "The server cannot handle this operation yet.")})
       #     return()}
       #   include_totals_t_or_f <-
-      #     if(input$include_totals == "Include Totals") T else F
+      #     if (input$include_totals == "Include Totals") T else F
       #   output$table_1 <- DT::renderDataTable({
       #     iv_dv_table(
       #       data = dt01,
@@ -773,17 +773,17 @@ start_ezr <- function(
       #       cell_function_name = input$function_name,
       #       sigfig = input$sigfig)})}
       # # pivot_table
-      # if(active_tab == "pivot_table") {
+      # if (active_tab == "pivot_table") {
       #   # limit by number of unique values
       #   number_of_rows <- prod(sapply(input$row_vars, function(x) {
       #     length(unique(dt01[[x]])) + 1}))
       #   number_of_columns <- prod(sapply(input$col_vars, function(x) {
       #     length(unique(dt01[[x]])) + 1}))
-      #   if(number_of_rows > 100) {
+      #   if (number_of_rows > 100) {
       #     output$message_to_user_01 <- renderText({
       #       paste0("There will be more than 100 rows in the table. ",
       #              "The server cannot handle this operation yet.")})
-      #   } else if(number_of_columns > 50) {
+      #   } else if (number_of_columns > 50) {
       #     output$message_to_user_01 <- renderText({
       #       paste0("There will be more than 50 columns in the table. ",
       #              "The server cannot handle this operation yet.")})
@@ -799,14 +799,14 @@ start_ezr <- function(
       #     )
       #   })}
       # view_data
-      if(active_tab == "view_data") {
+      if (active_tab == "view_data") {
         output$table_1 <- DT::renderDataTable({dt01})}
 
       # record action
       dt11 <- reactive_dt$run_analysis
       # save inputs
       input_names <- inputs_to_save(input$sidebar_menu)
-      if(length(input$names_of_filter_vars)) {
+      if (length(input$names_of_filter_vars)) {
         input_names <- c(
           input_names,
           paste0("filter_var_", seq_along(input$names_of_filter_vars)))
@@ -850,7 +850,7 @@ start_ezr <- function(
       dt01 <- reactive_dt$saved_analysis
       # save inputs
       input_names <- inputs_to_save(input$sidebar_menu)
-      if(length(input$names_of_filter_vars)) {
+      if (length(input$names_of_filter_vars)) {
         input_names <- c(
           input_names,
           paste0("filter_var_", seq_along(input$names_of_filter_vars)))
