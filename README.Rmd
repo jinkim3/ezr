@@ -15,9 +15,12 @@ knitr::opts_chunk$set(
 # ezr
 
 <!-- badges: start -->
+[![CRAN checks](https://cranchecks.info/badges/summary/ezr)](https://cran.r-project.org/web/checks/check_results_ezr.html)
 [![Travis build status](https://travis-ci.com/jinkim3/ezr.svg?branch=master)](https://travis-ci.com/jinkim3/ezr)
 [![R build status](https://github.com/jinkim3/ezr/workflows/R-CMD-check/badge.svg)](https://github.com/jinkim3/ezr/actions)
+
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/ezr?color=blue)](https://cran.r-project.org/package=ezr)
+[![](https://img.shields.io/github/last-commit/jinkim3/ezr.svg)](https://github.com/jinkim3/ezr/commits/master)
 [![CodeFactor](https://www.codefactor.io/repository/github/jinkim3/ezr/badge)](https://www.codefactor.io/repository/github/jinkim3/ezr)
 <!-- badges: end -->
 
