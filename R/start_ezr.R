@@ -419,7 +419,7 @@ start_ezr <- function(
     if (analysis == "iv_dv_table") {
       inputs_to_save <- c("iv", "dv", "include_totals", "function_name")
     }
-    if (analysis %in% c("pivot_table")) {
+    if (analysis == "pivot_table") {
       inputs_to_save <- c(
         "row_vars", "col_vars", "cell_var", "function_name")
     }
