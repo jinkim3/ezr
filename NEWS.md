@@ -1,3 +1,6 @@
+# ezr 0.1.7
+* Deleted "LazyData: true" from DESCRIPTION
+
 # ezr 0.1.6
 * Edited code following reviews by CodeFactor
 
